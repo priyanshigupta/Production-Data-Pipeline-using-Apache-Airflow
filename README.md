@@ -24,7 +24,7 @@ fact and dimension tables on the cluster to carry out data transformation.
 * Give cluster settings:
         * Add VDC security group for redshift
         * Enable Public accessibility
-<img src="Images/redshift_clus.PNG" alt="drawing" width="800" height="300"/>
+<img src="Images/redshift_cluster.PNG" alt="drawing" width="800" height="300"/>
 
 ## Connect to Airflow
 
