@@ -39,7 +39,7 @@ fact and dimension tables on the cluster to carry out data transformation.
 * Conn Type: Amazon Web Services.
 * Login: Enter your Access key ID from the IAM User credentials.
 * Password: Enter your Secret access key from the IAM User credentials.
-<img src="Images/aws_creds.PNG" alt="drawing" width="800" height="300"/>
+<img src="Images/aws_cred.PNG" alt="drawing" width="800" height="300"/>
 
 Once you've entered these values, select Save and Add Another.
 
