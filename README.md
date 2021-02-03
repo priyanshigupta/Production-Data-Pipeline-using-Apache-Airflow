@@ -58,7 +58,7 @@ Once you've entered these values, select Save.
 5. After seting up these connections. Go to homepage of Airflow UI, swith on your DAG button to start the DAG execution.
 
 ## DAG Architecture
-
+```
 airflow                      
 |   |               
 │   └───dags                     # Jupyter notebooks
@@ -75,7 +75,7 @@ airflow
 |       |   | load_dimension.py  # LoadDimensionOperator
 |       |   | load_fact.py       # LoadFactOperator
 |       |   | stage_redshift.py  # StageToRedshiftOperator
-
+```
 
 There are four important component of our architecture.
 1. MyDag.py contains all imports as well as declaratio of tasks that our dag comprises.
