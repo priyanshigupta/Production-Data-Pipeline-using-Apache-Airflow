@@ -84,14 +84,14 @@ Following are the four operators that I have included in the code:
 * The operator creates and runs a SQL COPY statement based on the parameters provided.
 * Load timestamped files from S3 based on the execution time and run backfills.
 
-2.LoadDimensionOperator
+2. LoadDimensionOperator
 
 * To load data from staging layer to dimension layer.
 * Use SQL queries defined in helper folder to execute this operator.
 * This operator is expected to take as input a SQL statement and target database on which to run the query against.
 * Dimension loads will be done in truncate-insert pattern where the target table is emptied before the load.
 
-3.LoadFactOperator
+3. LoadFactOperator
 
 * To load data from staging layer to fact layer.
 * Use SQL queries defined in helper folder to execute this operator.
@@ -106,10 +106,10 @@ Following are the four operators that I have included in the code:
    
 ## Start the DAG
 Start the DAG by switching it state from OFF to ON.
-<img src="Images/home.png" alt="drawing" width="800" height="300"/>
+<img src="Images/home.PNG" alt="drawing" width="800" height="300"/>
 
 Refresh the page and click on the Airflow_Project to view the current state.
-<img src="Images/dag_overview.png" alt="drawing" width="800" height="300"/>
+<img src="Images/dag_overview.PNG" alt="drawing" width="800" height="300"/>
 
 
 
