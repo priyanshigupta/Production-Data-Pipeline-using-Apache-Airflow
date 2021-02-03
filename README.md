@@ -5,8 +5,8 @@ Orchestrating data pipeline using advanced functionalities of Apache Airflow
 In this project we want to use functiionalities of Apache Airflow to introduce more automation and monitoring to the Data Warehouse ETL pipelines. 
 In this project,  we will be working with two datasets located in AWS S3:
 
-Log data: s3://udacity-dend/log_data
-Song data: s3://udacity-dend/song_data
+* Log data: s3://udacity-dend/log_data
+* Song data: s3://udacity-dend/song_data
 
 These files have been saved in JSON format. Through this project we will be building Airflow DAGs to load the data from S3 to AWS Redshift and further build 
 fact and dimension tables on the cluster to carry out data transformation.
@@ -34,6 +34,7 @@ fact and dimension tables on the cluster to carry out data transformation.
 2. Under Connections, select Create.
 
 3. Create connection for AWS hook, enter the following values:
+* Before creating this connection create an IAM role by using AWS IAM console and keep the key and secret key.
 * Conn Id: aws_credentials.
 * Conn Type: Amazon Web Services.
 * Login: Enter your Access key ID from the IAM User credentials.
@@ -57,6 +58,24 @@ Once you've entered these values, select Save.
 5. After seting up these connections. Go to homepage of Airflow UI, swith on your DAG button to start the DAG execution.
 
 ## DAG Architecture
+
+airflow                      
+|   |               
+│   └───dags                     # Jupyter notebooks
+│   |   │ Mydag.py  # DAG definition
+|   |   | subdag.py  # subdag definition
+|   |   |
+|   └───plugins
+│       │  
+|       └───helpers
+|       |   | sql_queries.py     # All sql queries needed
+|       |
+|       └───operators
+|       |   | data_quality.py    # DataQualityOperator
+|       |   | load_dimension.py  # LoadDimensionOperator
+|       |   | load_fact.py       # LoadFactOperator
+|       |   | stage_redshift.py  # StageToRedshiftOperator
+
 
 There are four important component of our architecture.
 1. MyDag.py contains all imports as well as declaratio of tasks that our dag comprises.
