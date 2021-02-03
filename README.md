@@ -38,7 +38,7 @@ fact and dimension tables on the cluster to carry out data transformation.
 * Conn Type: Amazon Web Services.
 * Login: Enter your Access key ID from the IAM User credentials.
 * Password: Enter your Secret access key from the IAM User credentials.
-<img src="Images/aws_creds.png" alt="drawing" width="800" height="300"/>
+<img src="Images/aws_creds.PNG" alt="drawing" width="800" height="300"/>
 
 Once you've entered these values, select Save and Add Another.
 
@@ -50,7 +50,7 @@ Once you've entered these values, select Save and Add Another.
 * Login: Enter awsuser.
 * Password: Enter the password you created when launching your Redshift cluster.
 * Port: Enter 5439.
-<img src="Images/redshift.png" alt="drawing" width="800" height="300"/>
+<img src="Images/redshift.PNG" alt="drawing" width="800" height="300"/>
 
 Once you've entered these values, select Save.
 
@@ -60,11 +60,11 @@ Once you've entered these values, select Save.
 
 There are four important component of our architecture.
 1. MyDag.py contains all imports as well as declaratio of tasks that our dag comprises.
-<img src="Images/airflow_dag.png" alt="drawing" width="800" height="300"/>
+<img src="Images/airflow_dag.PNG" alt="drawing" width="800" height="300"/>
 
 2. subdag.py contains the subdags whcich are included in the dag.
-<img src="Images/subdag_1.png" alt="drawing" width="800" height="300"/>
-<img src="Images/subdag_2.png" alt="drawing" width="800" height="300"/>
+<img src="Images/subdag_1.PNG" alt="drawing" width="800" height="300"/>
+<img src="Images/subdag_2.PNG" alt="drawing" width="800" height="300"/>
 
 3. Operators folder with operator templates for different operations executed in the dag.
 4. Helper folder contains SQL transformation queries which we run during the DAG execution.
