@@ -13,17 +13,17 @@ fact and dimension tables on the cluster to carry out data transformation.
 
 ## Prerequisite Installation
 
--> Before setting up and running Apache Airflow, please install Docker and Docker Compose.
--> Create file docker-compose.yml find its content in this [link](https://towardsdatascience.com/apache-airflow-and-postgresql-with-docker-and-docker-compose-5651766dfa96).
--> Positioning in the root directory and execute: “docker-compose up” in the command prompt.It should make airflow accessible on localhost:8080.
+* Before setting up and running Apache Airflow, please install Docker and Docker Compose.
+* Create file docker-compose.yml find its content in this [link](https://towardsdatascience.com/apache-airflow-and-postgresql-with-docker-and-docker-compose-5651766dfa96).
+* Positioning in the root directory and execute: “docker-compose up” in the command prompt.It should make airflow accessible on localhost:8080.
 
 ## Launching Redshift Cluster
 
--> Go to AWS Redshift Console
--> Click Create cluster
--> Give cluster settings:
-        - Add VDC security group for redshift
-        - Enable Public accessibility
+* Go to AWS Redshift Console
+* Click Create cluster
+* Give cluster settings:
+        * Add VDC security group for redshift
+        * Enable Public accessibility
 <img src="images/redshift_clus.png" alt="drawing" width="800" height="300"/>
 
 ## Connect to Airflow
@@ -34,22 +34,22 @@ fact and dimension tables on the cluster to carry out data transformation.
 2. Under Connections, select Create.
 
 3. Create connection for AWS hook, enter the following values:
-- Conn Id: aws_credentials.
-- Conn Type: Amazon Web Services.
-- Login: Enter your Access key ID from the IAM User credentials.
-- Password: Enter your Secret access key from the IAM User credentials.
+* Conn Id: aws_credentials.
+* Conn Type: Amazon Web Services.
+* Login: Enter your Access key ID from the IAM User credentials.
+* Password: Enter your Secret access key from the IAM User credentials.
 <img src="images/aws_creds.png" alt="drawing" width="800" height="300"/>
 
 Once you've entered these values, select Save and Add Another.
 
 4. Craete connection for Redshift , enter the following values:
-- Conn Id:  redshift.
-- Conn Type:  Postgres.
-- Host: Enter the endpoint of your Redshift cluster, excluding the port at the end.
-- Schema:  This is the Redshift database you want to connect to (given at time of cluster creation).
-- Login: Enter awsuser.
-- Password: Enter the password you created when launching your Redshift cluster.
-- Port: Enter 5439.
+* Conn Id:  redshift.
+* Conn Type:  Postgres.
+* Host: Enter the endpoint of your Redshift cluster, excluding the port at the end.
+* Schema:  This is the Redshift database you want to connect to (given at time of cluster creation).
+* Login: Enter awsuser.
+* Password: Enter the password you created when launching your Redshift cluster.
+* Port: Enter 5439.
 <img src="images/redshift.png" alt="drawing" width="800" height="300"/>
 
 Once you've entered these values, select Save.
@@ -70,38 +70,38 @@ There are four important component of our architecture.
 4. Helper folder contains SQL transformation queries which we run during the DAG execution.
 
 Add `default parameters` to the Dag template as follows:
--> Dag does not have dependencies on past runs
--> On failure, tasks are retried 3 times
--> Retries happen every 5 minutes
--> Catchup is turned off
--> Do not email on retry
+* Dag does not have dependencies on past runs
+* On failure, tasks are retried 3 times
+* Retries happen every 5 minutes
+* Catchup is turned off
+* Do not email on retry
 
 Following are the four operators that I have included in the code:
 
 1. StageToRedshiftOperator
 
--> Load any JSON formatted files from S3 to Amazon Redshift.
--> The operator creates and runs a SQL COPY statement based on the parameters provided.
--> Load timestamped files from S3 based on the execution time and run backfills.
+* Load any JSON formatted files from S3 to Amazon Redshift.
+* The operator creates and runs a SQL COPY statement based on the parameters provided.
+* Load timestamped files from S3 based on the execution time and run backfills.
 
 2.LoadDimensionOperator
 
--> To load data from staging layer to dimension layer.
--> Use SQL queries defined in helper folder to execute this operator.
--> This operator is expected to take as input a SQL statement and target database on which to run the query against.
--> Dimension loads will be done in truncate-insert pattern where the target table is emptied before the load.
+* To load data from staging layer to dimension layer.
+* Use SQL queries defined in helper folder to execute this operator.
+* This operator is expected to take as input a SQL statement and target database on which to run the query against.
+* Dimension loads will be done in truncate-insert pattern where the target table is emptied before the load.
 
 3.LoadFactOperator
 
--> To load data from staging layer to fact layer.
--> Use SQL queries defined in helper folder to execute this operator.
--> This operator is expected to take as input a SQL statement and target database on which to run the query against.
+* To load data from staging layer to fact layer.
+* Use SQL queries defined in helper folder to execute this operator.
+* This operator is expected to take as input a SQL statement and target database on which to run the query against.
 
 4. DataQualityOperator
 
--> Used to check duplicate records in the dimension anf fact tables.
--> The operator's main functionality is to receive one or more SQL based test cases along with the expected results and execute the tests.
--> Test result and expected results are checked and if there is no match, operator should raise an exception and the task should retry and fail eventually
+* Used to check duplicate records in the dimension anf fact tables.
+* The operator's main functionality is to receive one or more SQL based test cases along with the expected results and execute the tests.
+* Test result and expected results are checked and if there is no match, operator should raise an exception and the task should retry and fail eventually
 
    
 ## Start the DAG
